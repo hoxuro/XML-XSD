@@ -1,0 +1,11 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="TipoClave">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Za-z0-9]{5,12}"></xs:pattern>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="claveacceso" type="TipoClave" />
+
+</xs:schema>

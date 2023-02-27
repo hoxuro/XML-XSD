@@ -1,0 +1,14 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="TipoCategoria">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Monitores"/>
+      <xs:enumeration value="Discos Duros"/>
+      <xs:enumeration value="Redes"/>
+      <xs:enumeration value="Impresoras"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="categoriaProd" type="TipoCategoria" />
+
+</xs:schema>

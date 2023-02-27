@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+        <xs:element name="almacen">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element maxOccurs="unbounded" ref="proveedor"/>
+                                <xs:element maxOccurs="unbounded" ref="producto"/>
+                                <xs:element maxOccurs="unbounded" ref="cliente"/>
+                                <xs:element ref="factura"/>
+                                <xs:element ref="pedido"/>
+                        </xs:sequence>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="proveedor">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="nombreprov"/>
+                                <xs:element ref="direccionprov"/>
+                                <xs:element ref="tlfprov"/>
+                                <xs:element ref="faxprov"/>
+                        </xs:sequence>
+                        <xs:attribute name="idprov" use="required" type="xs:NCName"/>
+                        <xs:attribute name="pais" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="nombreprov" type="xs:NCName"/>
+        <xs:element name="direccionprov">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="lugar"/>
+                                <xs:element ref="numero"/>
+                                <xs:element ref="cp"/>
+                                <xs:element ref="municipio"/>
+                        </xs:sequence>
+                        <xs:attribute name="pais" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="tlfprov">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element maxOccurs="unbounded" ref="fijo"/>
+                                <xs:element maxOccurs="unbounded" ref="movil"/>
+                        </xs:sequence>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="fijo">
+                <xs:complexType>
+                        <xs:attribute name="numero" use="required" type="xs:integer"/>
+                        <xs:attribute name="prefijo" use="required" type="xs:integer"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="faxprov">
+                <xs:complexType>
+                        <xs:attribute name="numero" use="required" type="xs:integer"/>
+                        <xs:attribute name="prefijo" use="required" type="xs:integer"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="producto">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="nombreprod"/>
+                                <xs:element ref="pvpprod"/>
+                                <xs:element ref="stockprod"/>
+                        </xs:sequence>
+                        <xs:attribute name="categoriaprod" use="required" type="xs:NCName"/>
+                        <xs:attribute name="idprod" use="required" type="xs:NCName"/>
+                        <xs:attribute name="idprov" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="nombreprod" type="xs:string"/>
+        <xs:element name="pvpprod" type="xs:string"/>
+        <xs:element name="stockprod" type="xs:integer"/>
+        <xs:element name="cliente">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="nombrecli"/>
+                                <xs:element ref="direccioncli"/>
+                                <xs:element ref="tlfcli"/>
+                        </xs:sequence>
+                        <xs:attribute name="idcli" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="nombrecli" type="xs:string"/>
+        <xs:element name="direccioncli">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="lugar"/>
+                                <xs:element ref="numero"/>
+                                <xs:element ref="cp"/>
+                                <xs:element ref="municipio"/>
+                        </xs:sequence>
+                        <xs:attribute name="pais" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="tlfcli">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="movil"/>
+                        </xs:sequence>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="factura">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="fechafact"/>
+                                <xs:element maxOccurs="unbounded" ref="lineafact"/>
+                                <xs:element ref="subtotalfact"/>
+                                <xs:element ref="ivafact"/>
+                                <xs:element ref="importefact"/>
+                        </xs:sequence>
+                        <xs:attribute name="idclifact" use="required" type="xs:NCName"/>
+                        <xs:attribute name="idfact" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="fechafact">
+                <xs:complexType>
+                        <xs:attribute name="año" use="required" type="xs:integer"/>
+                        <xs:attribute name="dia" use="required" type="xs:integer"/>
+                        <xs:attribute name="mes" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="lineafact">
+                <xs:complexType>
+                        <xs:attribute name="cantidadfact" use="required" type="xs:integer"/>
+                        <xs:attribute name="idprodfact" use="required" type="xs:NCName"/>
+                        <xs:attribute name="pu" use="required"/>
+                        <xs:attribute name="total" use="required"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="subtotalfact" type="xs:string"/>
+        <xs:element name="ivafact" type="xs:string"/>
+        <xs:element name="importefact" type="xs:string"/>
+        <xs:element name="pedido">
+                <xs:complexType>
+                        <xs:sequence>
+                                <xs:element ref="fechaenvioped"/>
+                                <xs:element maxOccurs="unbounded" ref="lineaped"/>
+                                <xs:element ref="fechaentregaped"/>
+                        </xs:sequence>
+                        <xs:attribute name="idcliped" use="required" type="xs:NCName"/>
+                        <xs:attribute name="idped" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="fechaenvioped">
+                <xs:complexType>
+                        <xs:attribute name="año" use="required" type="xs:integer"/>
+                        <xs:attribute name="dia" use="required" type="xs:integer"/>
+                        <xs:attribute name="mes" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="lineaped">
+                <xs:complexType>
+                        <xs:attribute name="cantidadped" use="required" type="xs:integer"/>
+                        <xs:attribute name="idprodped" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="fechaentregaped">
+                <xs:complexType>
+                        <xs:attribute name="año" use="required" type="xs:integer"/>
+                        <xs:attribute name="dia" use="required" type="xs:integer"/>
+                        <xs:attribute name="mes" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="lugar">
+                <xs:complexType>
+                        <xs:choice>
+                                <xs:element ref="avenida"/>
+                                <xs:element ref="calle"/>
+                                <xs:element ref="plaza"/>
+                        </xs:choice>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="avenida" type="xs:string"/>
+        <xs:element name="calle" type="xs:string"/>
+        <xs:element name="plaza" type="xs:string"/>
+        <xs:element name="numero" type="xs:integer"/>
+        <xs:element name="cp" type="xs:integer"/>
+        <xs:element name="municipio">
+                <xs:complexType mixed="true">
+                        <xs:attribute name="provincia" use="required" type="xs:NCName"/>
+                </xs:complexType>
+        </xs:element>
+        <xs:element name="movil" type="xs:integer"/>
+</xs:schema>
+
